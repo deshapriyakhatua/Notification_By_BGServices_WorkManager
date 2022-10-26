@@ -33,10 +33,6 @@ import java.util.Map;
 
 public class WorkManager extends Worker {
 
-    private RequestQueue queue;
-    private StringRequest stringRequest;
-    private static final int REQUEST_CODE = 1;
-
     private static Runnable runnable;
     private String requestedResult;
     MediaPlayer mediaPlayer;
@@ -58,9 +54,7 @@ public class WorkManager extends Worker {
                 {
                     // code goes here.
                     mediaPlayer =MediaPlayer.create(getApplicationContext(), Settings.System.DEFAULT_RINGTONE_URI);
-
-                    networkRequest();
-                    queue.add(stringRequest);
+                    mediaPlayer.start();
 
                 }}).start();
 
@@ -73,74 +67,6 @@ public class WorkManager extends Worker {
     }
 
 
-    private void networkRequest(){
 
-        queue = Volley.newRequestQueue(getApplicationContext());
-        requestedResult = null;
-
-
-        String cookieStr;
-
-         if(MainActivity.getCookie().length()>0){ cookieStr = MainActivity.getCookie(); }
-         else{
-             cookieStr = "_ga=GA1.1.324437731.1671815920; _ga_QPY5B063JV=GS1.1.1672421517.3.1.1672421546.0.0.0; XSRF-TOKEN=eyJpdiI6InRUV29ab0pBWHZheHNVUzZKUW5WaUE9PSIsInZhbHVlIjoiam4yOE4vLythU1RqUnQ2OFhHZDB1d2ZCWTVZK3VpR20rbHVseFRqeXNNTHBSWWhFbDlVenBEN3RrdmlISGttR1FyZ2xVK0lFN1RUdjdQbFZMdWxacmc4bDFiUWp0eGgxdVdXMHk5YVBxZDN4LzJWMG5acFQ4d3ZramtHVWNOU3YiLCJtYWMiOiIwNjg0MTRkOTZhNTYwNDNhZWRlODg1NDgwODQ4YzFlNThiZTNhNjFhZDYyYzhiMDE5ZmZmNmMwYjE2NTcxYjBhIiwidGFnIjoiIn0%3D; masai_school_course_session=eyJpdiI6InBOdko4RmhtR09DSjJIU3ZTK2wwUmc9PSIsInZhbHVlIjoiU1ZjaTZEb1hMelkwYjNGN0YvMThvU0lGcXVZaDlDa3BqaUVTTzNNb3JVTTQwNHIrZnJ1MUk4cWFGMzhyTlVRTHBhay91S1ZIendNYXFzaGQ1cmRrcjhrYVN4U2tFbCtac21WSGdmRVY4VGZXUlJaNVYrREg2YzVFMTN6VGUxOEgiLCJtYWMiOiIwMjM1ZGJhMDA4NDg0ODlkNTMzODBlZTNkYjkxZDE5YWY2MTg5Nzg0ZDk0NWFkNDBkNjY0NzUxNDZlZWE5MDViIiwidGFnIjoiIn0%3D";
-         }
-
-        String url = "https://course.masaischool.com/dashboard";
-
-        // Request a string response from the provided URL.
-        stringRequest = new StringRequest(Request.Method.GET, url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        // Display the first 500 characters of the response string.
-                        requestedResult = response.toString();
-                        //Toast.makeText(NetworkRequestService.this, "Response is: " + response, Toast.LENGTH_SHORT).show();
-                        Log.d("response",response);
-
-                        if(requestedResult != null){
-                            if(requestedResult.contains("adarsha")){
-
-                                if(requestedResult.contains("You have unread notifications")){
-                                    Log.d("response1",response);
-                                    mediaPlayer.start();
-                                }else {
-                                }
-
-                            }else{
-                            }
-                        }else{
-                        }
-
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                //Toast.makeText(NetworkRequestService.this, error.toString(), Toast.LENGTH_SHORT).show();
-                Log.d("error",error.toString());
-                notificationManager.notify(NOTIFICATION_ID,notification2);
-            }
-        }){
-            @Override
-            public Map<String, String> getParams() throws AuthFailureError {
-                HashMap<String,String> header = new HashMap<>();
-                return header;
-            }
-
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                HashMap<String,String> header = new HashMap<>();
-                header.put("cookie",cookieStr);
-                return header;
-            }
-
-            @Override
-            public byte[] getBody() throws AuthFailureError {
-                return super.getBody();
-            }
-
-
-        };
-    }
 
 }
