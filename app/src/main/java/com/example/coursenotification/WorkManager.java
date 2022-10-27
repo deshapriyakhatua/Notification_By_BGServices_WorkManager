@@ -33,16 +33,9 @@ import java.util.Map;
 
 public class WorkManager extends Worker {
 
-    private NotificationManager notificationManager;
-    private Notification notification;
-    private Notification notification2;
-    private Notification notification3;
-    private Notification notification4;
     private RequestQueue queue;
     private StringRequest stringRequest;
     private static final int REQUEST_CODE = 1;
-    private static int NOTIFICATION_ID = 1;
-    private static String NOTIFICATION_CHANNEL_ID = "1";
 
     private static Runnable runnable;
     private String requestedResult;
@@ -66,7 +59,6 @@ public class WorkManager extends Worker {
                     // code goes here.
                     mediaPlayer =MediaPlayer.create(getApplicationContext(), Settings.System.DEFAULT_RINGTONE_URI);
 
-                    sendNotification();
                     networkRequest();
                     queue.add(stringRequest);
 
@@ -111,17 +103,13 @@ public class WorkManager extends Worker {
 
                                 if(requestedResult.contains("You have unread notifications")){
                                     Log.d("response1",response);
-                                    notificationManager.notify(NOTIFICATION_ID,notification3);
                                     mediaPlayer.start();
                                 }else {
-                                    notificationManager.notify(NOTIFICATION_ID,notification4);
                                 }
 
                             }else{
-                                notificationManager.notify(NOTIFICATION_ID,notification);
                             }
                         }else{
-                            notificationManager.notify(NOTIFICATION_ID,notification);
                         }
 
                     }
@@ -155,75 +143,4 @@ public class WorkManager extends Worker {
         };
     }
 
-    public void sendNotification(){
-
-        notificationManager = (NotificationManager) getApplicationContext().getSystemService(NOTIFICATION_SERVICE);
-        notificationManager.createNotificationChannel(new NotificationChannel(NOTIFICATION_CHANNEL_ID,"General",NotificationManager.IMPORTANCE_HIGH));
-
-        //PENDING INTENT
-        Intent intent = new Intent(Intent.ACTION_VIEW);
-        intent.setData(Uri.parse("https://course.masaischool.com/dashboard"));
-
-        PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(),REQUEST_CODE,intent,PendingIntent.FLAG_UPDATE_CURRENT);
-
-
-
-        // big picture style
-        Bitmap largeIcon = BitmapFactory.decodeResource(getApplicationContext().getResources(), R.drawable.big_image);
-        Notification.BigPictureStyle bigPictureStyle = new Notification.BigPictureStyle()
-                .bigPicture(largeIcon)
-                .bigLargeIcon(largeIcon)
-                .setBigContentTitle("Content Title")
-                .setSummaryText("Summary Text");
-
-
-
-        // creating notification
-        notification = new Notification.Builder(getApplicationContext(),NOTIFICATION_CHANNEL_ID)
-                .setLargeIcon(largeIcon)
-                .setContentTitle("Update your cookie")
-                .setSmallIcon(R.drawable.ic_baseline_circle_notifications_24)
-                .setContentText("log in to browser and copy the cookie")
-                .setSubText("cookie expired !")
-                .setChannelId(NOTIFICATION_CHANNEL_ID)
-                //.setStyle(bigPictureStyle)
-                .setContentIntent(pendingIntent)
-                .build();
-
-        // creating notification2
-        notification2 = new Notification.Builder(getApplicationContext(),NOTIFICATION_CHANNEL_ID)
-                .setLargeIcon(largeIcon)
-                .setContentTitle("Turn on internet")
-                .setSmallIcon(R.drawable.ic_baseline_circle_notifications_24)
-                .setContentText("turn on your internet for update")
-                .setSubText("internet turned off !")
-                .setChannelId(NOTIFICATION_CHANNEL_ID)
-                //.setStyle(bigPictureStyle)
-                .setContentIntent(pendingIntent)
-                .build();
-
-        // creating notification3
-        notification3 = new Notification.Builder(getApplicationContext(),NOTIFICATION_CHANNEL_ID)
-                .setLargeIcon(largeIcon)
-                .setContentTitle("New Notification")
-                .setSmallIcon(R.drawable.ic_baseline_circle_notifications_24)
-                .setContentText("new notifications available")
-                .setSubText("notification available")
-                .setChannelId(NOTIFICATION_CHANNEL_ID)
-                //.setStyle(bigPictureStyle)
-                .setContentIntent(pendingIntent)
-                .build();
-
-        // creating notification4
-        notification4 = new Notification.Builder(getApplicationContext(),NOTIFICATION_CHANNEL_ID)
-                .setLargeIcon(largeIcon)
-                .setContentTitle("No Notification")
-                .setSmallIcon(R.drawable.ic_baseline_circle_notifications_24)
-                .setContentText("No notifications available")
-                .setSubText("No notification available")
-                .setChannelId(NOTIFICATION_CHANNEL_ID)
-                //.setStyle(bigPictureStyle)
-                .setContentIntent(pendingIntent)
-                .build();
-    }
 }
