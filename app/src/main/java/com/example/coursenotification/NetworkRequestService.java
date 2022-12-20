@@ -63,7 +63,6 @@ public class NetworkRequestService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
 
         mediaPlayer =MediaPlayer.create(this, Settings.System.DEFAULT_RINGTONE_URI);
-        sendNotification();
         bool = true;
 
         scheduledExecutorService = Executors.newScheduledThreadPool(1);
@@ -118,14 +117,14 @@ public class NetworkRequestService extends Service {
 
                                 if(requestedResult.contains("You have unread notifications")){
                                     Log.d("response1",response);
-                                    notificationManager.notify(NOTIFICATION_ID,notification3);
+
                                 }
 
                             }else{
-                                notificationManager.notify(NOTIFICATION_ID,notification);
+
                             }
                         }else{
-                            notificationManager.notify(NOTIFICATION_ID,notification);
+
                         }
 
                     }
@@ -134,7 +133,6 @@ public class NetworkRequestService extends Service {
             public void onErrorResponse(VolleyError error) {
                 //Toast.makeText(NetworkRequestService.this, error.toString(), Toast.LENGTH_SHORT).show();
                 Log.d("error",error.toString());
-                notificationManager.notify(NOTIFICATION_ID,notification2);
             }
         }){
             @Override
@@ -159,64 +157,6 @@ public class NetworkRequestService extends Service {
         };
     }
 
-    public void sendNotification(){
 
-        notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-        notificationManager.createNotificationChannel(new NotificationChannel(NOTIFICATION_CHANNEL_ID,"General",NotificationManager.IMPORTANCE_HIGH));
-
-        //PENDING INTENT
-        Intent intent = new Intent(getApplicationContext(),MainActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-
-        PendingIntent pendingIntent = PendingIntent.getActivity(this,REQUEST_CODE,intent,PendingIntent.FLAG_UPDATE_CURRENT);
-
-
-
-        // big picture style
-        Bitmap largeIcon = BitmapFactory.decodeResource(getResources(), R.drawable.big_image);
-        Notification.BigPictureStyle bigPictureStyle = new Notification.BigPictureStyle()
-                .bigPicture(largeIcon)
-                .bigLargeIcon(largeIcon)
-                .setBigContentTitle("Content Title")
-                .setSummaryText("Summary Text");
-
-
-
-        // creating notification
-        notification = new Notification.Builder(NetworkRequestService.this,NOTIFICATION_CHANNEL_ID)
-                .setLargeIcon(largeIcon)
-                .setContentTitle("Update your cookie")
-                .setSmallIcon(R.drawable.ic_baseline_circle_notifications_24)
-                .setContentText("log in to browser and copy the cookie")
-                .setSubText("cookie expired !")
-                .setChannelId(NOTIFICATION_CHANNEL_ID)
-                //.setStyle(bigPictureStyle)
-                .setContentIntent(pendingIntent)
-                .build();
-
-        // creating notification2
-        notification2 = new Notification.Builder(NetworkRequestService.this,NOTIFICATION_CHANNEL_ID)
-                .setLargeIcon(largeIcon)
-                .setContentTitle("Turn on internet")
-                .setSmallIcon(R.drawable.ic_baseline_circle_notifications_24)
-                .setContentText("turn on your internet for update")
-                .setSubText("internet turned off !")
-                .setChannelId(NOTIFICATION_CHANNEL_ID)
-                //.setStyle(bigPictureStyle)
-                .setContentIntent(pendingIntent)
-                .build();
-
-        // creating notification3
-        notification3 = new Notification.Builder(NetworkRequestService.this,NOTIFICATION_CHANNEL_ID)
-                .setLargeIcon(largeIcon)
-                .setContentTitle("New Notification")
-                .setSmallIcon(R.drawable.ic_baseline_circle_notifications_24)
-                .setContentText("new notifications available")
-                .setSubText("notification available")
-                .setChannelId(NOTIFICATION_CHANNEL_ID)
-                //.setStyle(bigPictureStyle)
-                .setContentIntent(pendingIntent)
-                .build();
-    }
 }
 
