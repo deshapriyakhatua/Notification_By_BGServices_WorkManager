@@ -73,13 +73,13 @@ public class MainActivity extends AppCompatActivity {
         // Network request
 
         // Instantiate the RequestQueue.
-        String cookieStr = "remember_web_59ba36addc2b2f9401580f014c7f58ea4e30989d=eyJpdiI6IjBUbWNyYmdVMVBCOGFVb2VTaUx4YlE9PSIsInZhbHVlIjoiQUhoK3ZwM0xoT21KU3pST2twVTEwZkZhVU56UEhpd2QxMWVnY3dBTkd1SmtKYVJsaFBLS2pQVmJTaWYwZE5Nd1JDZXJIT2NBQ2ZNNTlxdEdUaVV6QnV6TzdyUVpXREYzbmd0a0tOUUxHVlBpZHMyMEpsemRIcnorTy81cXcwbUZMYml2ZzNXa2YwZG16KzdxUithZEYxVmFXQnVzZzFRaG5Kbm4yOWdacG1XV0dwaGx0SEswbDAvOWF3OWc3Z0NRS0lnTzBRNmFuR2NYWGVHVDFMQm9SY1pad2RNMVJPWk1RVU1pL2lrM2VWMD0iLCJtYWMiOiI4YTM3MjUwMjIyY2I1NTlhY2IzNDI5ZTE4YmNmZDQ0MzlmYTViYThlZDE4Yjg4ZWM3MmQzZGU5MGNkZGI3OWY2IiwidGFnIjoiIn0%3D; _ga=GA1.1.823814017.1669915138; oj-production-session_token=thntgassih2tqtcgy5lpy6bv05drt4by; _ga_EGC300HF7J=GS1.1.1671098152.2.1.1671098196.0.0.0; XSRF-TOKEN=eyJpdiI6Ik9yclcyNmd6QUE4UVF1czZYMWtpOWc9PSIsInZhbHVlIjoiK25SejE0akp3NzhqRzdlcCtaKzVpNlg1ckdYaXd6RmRxM2hxeGVDVTlKOGhjZzQ4TDlEMFR4OWpNTWtjSlRJR3UyVkNqb2NHcGVlRnBoSHNvM21NWHlQazQwNHdQZThkR2o2aVlFNDM4R1RlbTNNTEZIRXhQbVk3a1NCZDRrb0YiLCJtYWMiOiJiNTZmYjM1YzE1YWRiMDEzMjA4ZTQ5YjAwOTkxZDE1NjFkODgwMDU3MjNmZTExMTViMTY3NTBlNmEzZjE0ZDNjIiwidGFnIjoiIn0%3D; masai_school_course_session=eyJpdiI6IjROMEFBaTBteFhOU1hFeGNFVVNTR0E9PSIsInZhbHVlIjoiZk1mYkdrdG5VRG8xZVgyRlRHMjNMeWZKTXRRUDZsMmZtVEM5SndTNTZFSWc0dmk3eG1ZOW5yM1grRDZZOWRqZzhJekRrV0ZVQTM5QVI0OVp4TUhpaVBibiswV2tDUlE4bFpMUktXa09LUTQ1ZWFDZnI1Zm5RNFpDMHE0YklkcnQiLCJtYWMiOiI3NzgwZWE0ZTRjM2NhNmM4ODM0ZDc1NzllMWY0ZGQ3ZDUyZGY5YjMzYjU5NTg2NmQzZWY1NWZmYjY2YWYxMTBjIiwidGFnIjoiIn0%3D";
+        String cookieStr = "gr_user_id=811a64be-94b2-432e-ab46-f4526054da1c; 87b5a3c3f1a55520_gr_last_sent_cs1=deshapriyakhatua; __stripe_mid=afa791fc-c67f-41e4-aeed-7182f4a98a0de0b05c; _gcl_au=1.1.21572496.1670728269; intercom-id-pq9rak4o=d98cc369-26af-4b9e-a1ec-1cf5253a58fe; intercom-device-id-pq9rak4o=91d813ab-f72c-4e4f-b207-415d786b45d3; _ga_DKXQ03QCVK=GS1.1.1670728268.1.1.1670728274.54.0.0; _gid=GA1.2.2135118631.1671165589; __atuvc=3%7C48%2C2%7C49%2C0%7C50%2C3%7C51; csrftoken=IoJUo87p30YlLyanFoiL980XhiX1WE45oRjzPCTjM03DZUYhE4Z6YH8K7cahwboX; LEETCODE_SESSION=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfYXV0aF91c2VyX2lkIjoiNTQzNzM2MCIsIl9hdXRoX3VzZXJfYmFja2VuZCI6ImFsbGF1dGguYWNjb3VudC5hdXRoX2JhY2tlbmRzLkF1dGhlbnRpY2F0aW9uQmFja2VuZCIsIl9hdXRoX3VzZXJfaGFzaCI6IjdjOTBmNzVlMTc1YjVlY2M5Y2E4ZjViNjVmMGQ5Y2RjYzM0ZGVjMWQiLCJpZCI6NTQzNzM2MCwiZW1haWwiOiJkZXNoYXByaXlha2hhdHVhQGdtYWlsLmNvbSIsInVzZXJuYW1lIjoiZGVzaGFwcml5YWtoYXR1YSIsInVzZXJfc2x1ZyI6ImRlc2hhcHJpeWFraGF0dWEiLCJhdmF0YXIiOiJodHRwczovL2Fzc2V0cy5sZWV0Y29kZS5jb20vdXNlcnMvYXZhdGFycy9hdmF0YXJfMTY1NjY2MDE4MS5wbmciLCJyZWZyZXNoZWRfYXQiOjE2NzE1NDgyMTksImlwIjoiMTE1LjE4Ny40OS4xODMiLCJpZGVudGl0eSI6ImE4MThhYjM1OTgwNDUxN2YyNTQ5ZTk0Yzg4ZDAzYzBiIiwic2Vzc2lvbl9pZCI6MzI0ODcxNDd9.eijpU4Z18ZebT2Mf7BXIqNOmIdTZv2Tt9cGGdUmuCBI; _ga=GA1.1.740290690.1669701377; 87b5a3c3f1a55520_gr_cs1=deshapriyakhatua; _ga_CDRWKZTDEX=GS1.1.1671596579.42.0.1671596579.0.0.0; NEW_PROBLEMLIST_PAGE=1; _dd_s=rum=1&id=013e3baf-e1cf-4f2b-94d9-41315dc02c60&created=1671601333952&expire=1671602233952";
 
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url = "https://course.masaischool.com/dashboard/";
+        String url = "https://leetcode.com/graphql/";
 
         // Request a string response from the provided URL.
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -95,10 +95,16 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 HashMap header = new HashMap();
+                header.put("content-type","application/json");
                 header.put("cookie",cookieStr);
                 return header;
             }
 
+            @Override
+            public byte[] getBody() throws AuthFailureError {
+
+                return super.getBody();
+            }
         };
 
         // Add the request to the RequestQueue.
