@@ -73,13 +73,12 @@ public class MainActivity extends AppCompatActivity {
         // Network request
 
         // Instantiate the RequestQueue.
-        String cookieStr = "gr_user_id=811a64be-94b2-432e-ab46-f4526054da1c; 87b5a3c3f1a55520_gr_last_sent_cs1=deshapriyakhatua; __stripe_mid=afa791fc-c67f-41e4-aeed-7182f4a98a0de0b05c; _gcl_au=1.1.21572496.1670728269; intercom-id-pq9rak4o=d98cc369-26af-4b9e-a1ec-1cf5253a58fe; intercom-device-id-pq9rak4o=91d813ab-f72c-4e4f-b207-415d786b45d3; _ga_DKXQ03QCVK=GS1.1.1670728268.1.1.1670728274.54.0.0; _gid=GA1.2.2135118631.1671165589; __atuvc=3%7C48%2C2%7C49%2C0%7C50%2C3%7C51; csrftoken=IoJUo87p30YlLyanFoiL980XhiX1WE45oRjzPCTjM03DZUYhE4Z6YH8K7cahwboX; LEETCODE_SESSION=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfYXV0aF91c2VyX2lkIjoiNTQzNzM2MCIsIl9hdXRoX3VzZXJfYmFja2VuZCI6ImFsbGF1dGguYWNjb3VudC5hdXRoX2JhY2tlbmRzLkF1dGhlbnRpY2F0aW9uQmFja2VuZCIsIl9hdXRoX3VzZXJfaGFzaCI6IjdjOTBmNzVlMTc1YjVlY2M5Y2E4ZjViNjVmMGQ5Y2RjYzM0ZGVjMWQiLCJpZCI6NTQzNzM2MCwiZW1haWwiOiJkZXNoYXByaXlha2hhdHVhQGdtYWlsLmNvbSIsInVzZXJuYW1lIjoiZGVzaGFwcml5YWtoYXR1YSIsInVzZXJfc2x1ZyI6ImRlc2hhcHJpeWFraGF0dWEiLCJhdmF0YXIiOiJodHRwczovL2Fzc2V0cy5sZWV0Y29kZS5jb20vdXNlcnMvYXZhdGFycy9hdmF0YXJfMTY1NjY2MDE4MS5wbmciLCJyZWZyZXNoZWRfYXQiOjE2NzE1NDgyMTksImlwIjoiMTE1LjE4Ny40OS4xODMiLCJpZGVudGl0eSI6ImE4MThhYjM1OTgwNDUxN2YyNTQ5ZTk0Yzg4ZDAzYzBiIiwic2Vzc2lvbl9pZCI6MzI0ODcxNDd9.eijpU4Z18ZebT2Mf7BXIqNOmIdTZv2Tt9cGGdUmuCBI; _ga=GA1.1.740290690.1669701377; 87b5a3c3f1a55520_gr_cs1=deshapriyakhatua; _ga_CDRWKZTDEX=GS1.1.1671596579.42.0.1671596579.0.0.0; NEW_PROBLEMLIST_PAGE=1; _dd_s=rum=1&id=013e3baf-e1cf-4f2b-94d9-41315dc02c60&created=1671601333952&expire=1671602233952";
-
+        String cookieStr = "_gcl_au=1.1.921406518.1669701353; gfg_nluid=07557b7692f198ff343480c3e65402cf; gfguserName=deshapriyakhatua%2FeyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvd3d3LmdlZWtzZm9yZ2Vla3Mub3JnXC8iLCJpYXQiOjE2Njk3MDEzNTgsImV4cCI6MTY3MjI5MzM1NywiaGFuZGxlIjoiZGVzaGFwcml5YWtoYXR1YSIsInV1aWQiOiIwODk2OGY4ZmM5ZGYyYmY0M2YzOTU2YzRiYTZlZjg1ZiIsInByb2ZpbGVVcmwiOiJodHRwczpcL1wvbWVkaWEuZ2Vla3Nmb3JnZWVrcy5vcmdcL2F1dGhcL3Byb2ZpbGVcLzE0YWZiZHFlYnJnc21sNjI5czJtIiwiaW5zdGl0dXRlSWQiOjMyMjYsImluc3RpdHV0ZU5hbWUiOiJVbml2ZXJzaXR5IG9mIENhbGN1dHRhIEtvbGthdGEiLCJuYW1lIjoiRGVzaGFwcml5YSBLaGF0dWEiLCJpc0ludGVyZXN0U2VsZWN0ZWQiOnRydWUsInB1aWQiOiJzbWlOUnRBMDB3PT0iLCJwYSI6MX0.aGQnLv3w4Q3axia2WHR6g8SKnh8XPf7jjQnbHh6L7_XxH_DnAWVKzsmHzVy-dR18Fi7KYptYruRFPKvoxJXO-xZaIBaxLUEa3QMnjpLpzs33SxVAnmlzVJ0kdsEN6esQ4xt63izJ4-9LInV9s8Adqy8gP05fBhIhUbxsVb1zw4KFHlrrGbLBhRGzBANI6W6c744tB5FGVKpyuw7LXUAuOl-Jho7FwEEAfkGtZVL6Hs4O77QbS0UD896K4FPK2h8Rxp_lh7sQDfDM0PSAC2dgJjqVquSY8VAqV77TdGkCxrmOFbgRCZPTuaQ3ih6x1uNuGIiW08HC7Y2g1I7dAAarfQ; gfg_id5_identity=5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9; gfg_theme=gfgThemeDark; __gads=ID=5b015fadcaad6946:T=1669702234:S=ALNI_MbHbSw7T9GiFuK_Zf0Le2i6OjCZLw; _fbp=fb.1.1669953814971.895157593; _gid=GA1.2.473384834.1671506705; _gaexp=GAX1.2.jhuNsO7LQHy-phLreIrQFA.19432.2!Nyj9kzaYThyH_VqFdyCUrQ.19378.1!Dl3qzJlrQ1OS_ygo0Lrqdw.19380.2!qxX5h9pCShOJ6wpFLYyrmA.19380.1; __gpi=UID=00000b85b47a599f:T=1669702234:RT=1671557008:S=ALNI_MZt-VXYo6yk-JlETnH7p5LMamW_Pg; FCNEC=%5B%5B%22AKsRol9Ock9egG_sbqJz-fBI5W5moXUQb5s7FBTEguGxlMkAIWom8mtTLQNqOSLH4EgxOnf4awZYSdESIlp4Nc00BBBLSpIhBuvj9-GmfAv09B-2tlRkykjBY7iqJMDIBKv6Q90W4HUPwPOOAiaUm1mZUaDWjYd2dg%3D%3D%22%5D%2Cnull%2C%5B%5D%5D; _ga_DWCCJLKX3X=GS1.1.1671557004.10.1.1671560580.33.0.0; _clck=1puwscc|1|f7l|0; _ga=GA1.1.1676381588.1669701353; _gat_gtag_UA_71763465_1=1; _clsk=1y129kv|1671633532250|1|1|e.clarity.ms/collect; _ga_SZ454CLTZM=GS1.1.1671633531.36.0.1671633540.51.0.0; http_referrer=\"https://practice.geeksforgeeks.org/problem-of-the-day\"";
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url = "https://leetcode.com/graphql/";
+        String url = "https://practiceapi.geeksforgeeks.org/api/v1/users/getProfile";
 
         // Request a string response from the provided URL.
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -95,16 +94,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 HashMap header = new HashMap();
-                header.put("content-type","application/json");
                 header.put("cookie",cookieStr);
                 return header;
             }
 
-            @Override
-            public byte[] getBody() throws AuthFailureError {
-
-                return super.getBody();
-            }
         };
 
         // Add the request to the RequestQueue.
