@@ -74,9 +74,9 @@ public class MainActivity extends AppCompatActivity {
         // Network request
 
         // Instantiate the RequestQueue.
-        String cookieStr = "gfguserName=deshapriyakhatua%2FeyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvd3d3LmdlZWtzZm9yZ2Vla3Mub3JnXC8iLCJpYXQiOjE2Njk3MDEzNTgsImV4cCI6MTY3MjI5MzM1NywiaGFuZGxlIjoiZGVzaGFwcml5YWtoYXR1YSIsInV1aWQiOiIwODk2OGY4ZmM5ZGYyYmY0M2YzOTU2YzRiYTZlZjg1ZiIsInByb2ZpbGVVcmwiOiJodHRwczpcL1wvbWVkaWEuZ2Vla3Nmb3JnZWVrcy5vcmdcL2F1dGhcL3Byb2ZpbGVcLzE0YWZiZHFlYnJnc21sNjI5czJtIiwiaW5zdGl0dXRlSWQiOjMyMjYsImluc3RpdHV0ZU5hbWUiOiJVbml2ZXJzaXR5IG9mIENhbGN1dHRhIEtvbGthdGEiLCJuYW1lIjoiRGVzaGFwcml5YSBLaGF0dWEiLCJpc0ludGVyZXN0U2VsZWN0ZWQiOnRydWUsInB1aWQiOiJzbWlOUnRBMDB3PT0iLCJwYSI6MX0.aGQnLv3w4Q3axia2WHR6g8SKnh8XPf7jjQnbHh6L7_XxH_DnAWVKzsmHzVy-dR18Fi7KYptYruRFPKvoxJXO-xZaIBaxLUEa3QMnjpLpzs33SxVAnmlzVJ0kdsEN6esQ4xt63izJ4-9LInV9s8Adqy8gP05fBhIhUbxsVb1zw4KFHlrrGbLBhRGzBANI6W6c744tB5FGVKpyuw7LXUAuOl-Jho7FwEEAfkGtZVL6Hs4O77QbS0UD896K4FPK2h8Rxp_lh7sQDfDM0PSAC2dgJjqVquSY8VAqV77TdGkCxrmOFbgRCZPTuaQ3ih6x1uNuGIiW08HC7Y2g1I7dAAarfQ";
+        String cookieStr = "remember_web_59ba36addc2b2f9401580f014c7f58ea4e30989d=eyJpdiI6IjBUbWNyYmdVMVBCOGFVb2VTaUx4YlE9PSIsInZhbHVlIjoiQUhoK3ZwM0xoT21KU3pST2twVTEwZkZhVU56UEhpd2QxMWVnY3dBTkd1SmtKYVJsaFBLS2pQVmJTaWYwZE5Nd1JDZXJIT2NBQ2ZNNTlxdEdUaVV6QnV6TzdyUVpXREYzbmd0a0tOUUxHVlBpZHMyMEpsemRIcnorTy81cXcwbUZMYml2ZzNXa2YwZG16KzdxUithZEYxVmFXQnVzZzFRaG5Kbm4yOWdacG1XV0dwaGx0SEswbDAvOWF3OWc3Z0NRS0lnTzBRNmFuR2NYWGVHVDFMQm9SY1pad2RNMVJPWk1RVU1pL2lrM2VWMD0iLCJtYWMiOiI4YTM3MjUwMjIyY2I1NTlhY2IzNDI5ZTE4YmNmZDQ0MzlmYTViYThlZDE4Yjg4ZWM3MmQzZGU5MGNkZGI3OWY2IiwidGFnIjoiIn0%3D; _ga=GA1.1.823814017.1669915138; oj-production-session_token=thntgassih2tqtcgy5lpy6bv05drt4by; _ga_EGC300HF7J=GS1.1.1671098152.2.1.1671098196.0.0.0; XSRF-TOKEN=eyJpdiI6IkdKdkFQanhJZ1ROR0VQemdwK0Z6NUE9PSIsInZhbHVlIjoiNUxJNlJrbk9CeWJ5MDhkL0hBZWxyYXY0cEJDbHZ6YytwMG92Y2w1anA2S0VIWEtySUo0VWFLeE0yZGF2a012VHpXWEp4STNmRmMyVWFYSUxqL0ZJWFJqYmx1NkRudTZSSjBqYXR1L2tvRy9SbTNSaExUVW5jblQ3azFrTVZrbnkiLCJtYWMiOiI1ZTU4ZmE3ZjNjZGUzOGJjOWFhNmRmOTU4MDhkYjg4ZDk4MjM5NjgxYTQwYjZlMmEwNzZmZjhjMmI0NjE1M2EyIiwidGFnIjoiIn0%3D; masai_school_course_session=eyJpdiI6IllQa0RhVjRyWm1NSmlVM2tHV0tqZEE9PSIsInZhbHVlIjoidjdheHpxSDZadGg1SXh5bWN2L284cDZlVFdsV0pzK0YzRnhTTURkaEhFRDFoYU1UbUU3R2grdkd6R2kzVGhmVEZEWGx5Q3lFNGozUWpDS0ppRW4vblJMTFBzUjhFVnl4cTJscDMxeDFJdkExSmRNcS9aM2hvVkpwaXBLNnMrbVUiLCJtYWMiOiJhNzBhZmRhNmEzM2Q5OTM4YWU5Yjk0MWUxMTA0ZGE4NDYyZTlkNWQxYzBlMzczNDAzZTNhNWM5MjkwMjQ5YzljIiwidGFnIjoiIn0%3D";
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url = "https://practiceapi.geeksforgeeks.org/api/v1/users/getProfile";
+        String url = "https://course.masaischool.com/dashboard";
 
         // Request a string response from the provided URL.
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
@@ -95,7 +95,8 @@ public class MainActivity extends AppCompatActivity {
         }){
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
-                HashMap header = new HashMap();
+                HashMap<String,String> header = new HashMap<>();
+                header.put("Host","<calculated when request is sent>");
                 header.put("cookie",cookieStr);
                 return header;
             }
