@@ -1,5 +1,6 @@
 package com.example.coursenotification;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import android.app.Notification;
 import android.app.NotificationChannel;
@@ -74,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
         // Network request
 
         // Instantiate the RequestQueue.
-        String cookieStr = "remember_web_59ba36addc2b2f9401580f014c7f58ea4e30989d=eyJpdiI6IjBUbWNyYmdVMVBCOGFVb2VTaUx4YlE9PSIsInZhbHVlIjoiQUhoK3ZwM0xoT21KU3pST2twVTEwZkZhVU56UEhpd2QxMWVnY3dBTkd1SmtKYVJsaFBLS2pQVmJTaWYwZE5Nd1JDZXJIT2NBQ2ZNNTlxdEdUaVV6QnV6TzdyUVpXREYzbmd0a0tOUUxHVlBpZHMyMEpsemRIcnorTy81cXcwbUZMYml2ZzNXa2YwZG16KzdxUithZEYxVmFXQnVzZzFRaG5Kbm4yOWdacG1XV0dwaGx0SEswbDAvOWF3OWc3Z0NRS0lnTzBRNmFuR2NYWGVHVDFMQm9SY1pad2RNMVJPWk1RVU1pL2lrM2VWMD0iLCJtYWMiOiI4YTM3MjUwMjIyY2I1NTlhY2IzNDI5ZTE4YmNmZDQ0MzlmYTViYThlZDE4Yjg4ZWM3MmQzZGU5MGNkZGI3OWY2IiwidGFnIjoiIn0%3D; _ga=GA1.1.823814017.1669915138; oj-production-session_token=thntgassih2tqtcgy5lpy6bv05drt4by; _ga_EGC300HF7J=GS1.1.1671098152.2.1.1671098196.0.0.0; XSRF-TOKEN=eyJpdiI6IkdKdkFQanhJZ1ROR0VQemdwK0Z6NUE9PSIsInZhbHVlIjoiNUxJNlJrbk9CeWJ5MDhkL0hBZWxyYXY0cEJDbHZ6YytwMG92Y2w1anA2S0VIWEtySUo0VWFLeE0yZGF2a012VHpXWEp4STNmRmMyVWFYSUxqL0ZJWFJqYmx1NkRudTZSSjBqYXR1L2tvRy9SbTNSaExUVW5jblQ3azFrTVZrbnkiLCJtYWMiOiI1ZTU4ZmE3ZjNjZGUzOGJjOWFhNmRmOTU4MDhkYjg4ZDk4MjM5NjgxYTQwYjZlMmEwNzZmZjhjMmI0NjE1M2EyIiwidGFnIjoiIn0%3D; masai_school_course_session=eyJpdiI6IllQa0RhVjRyWm1NSmlVM2tHV0tqZEE9PSIsInZhbHVlIjoidjdheHpxSDZadGg1SXh5bWN2L284cDZlVFdsV0pzK0YzRnhTTURkaEhFRDFoYU1UbUU3R2grdkd6R2kzVGhmVEZEWGx5Q3lFNGozUWpDS0ppRW4vblJMTFBzUjhFVnl4cTJscDMxeDFJdkExSmRNcS9aM2hvVkpwaXBLNnMrbVUiLCJtYWMiOiJhNzBhZmRhNmEzM2Q5OTM4YWU5Yjk0MWUxMTA0ZGE4NDYyZTlkNWQxYzBlMzczNDAzZTNhNWM5MjkwMjQ5YzljIiwidGFnIjoiIn0%3D";
+        String cookieStr = "_ga=GA1.1.324437731.1671815920; _ga_QPY5B063JV=GS1.1.1671815919.1.1.1671816271.0.0.0; XSRF-TOKEN=eyJpdiI6InNVRWhCYm1FQjhpRlFnZmxqNzhxbnc9PSIsInZhbHVlIjoiQkduaENTai9leWFUcllBM21NZnpDckJGM1pHZGVpN0I3T0FCYVkzczMvVzRTK1hLQ2VNMU9TWkk0UG01d25CTHV6RmxOUmF5aDdibEU3b3ZmUUdlSi9sNHVtMDN1d2tTY3B2VFErdFcrM2xWNFVEMFU1WFhuaHRGNmo1SDdtTlEiLCJtYWMiOiIxY2VmZWY4MGRjOGZiYzUwNDViZmE5MTllZjE4YjRjYTk3MTQ5MmJjNmNjMDczMzkyMDlkMjBlZTRjMGY3NmVlIiwidGFnIjoiIn0%3D; masai_school_course_session=eyJpdiI6IjIyQ0xWNjY3ZXZXUS9vcjhTY0lVbXc9PSIsInZhbHVlIjoiU0pmVzcwaUp6VXNCelJrTWJGTmlRN1JuL0lCS0FjOWhBb0tQcVpxVEFic3BOajlXWUV6UUxtOHZFUVVuRGF5d1k1TjFrVmdnMlJrbjh6Z1RZNXZyUm94TldyMUJUenlzSjUvdlkrRS9nOUdiTnh0NVZyZldYbGlpVTFoNzZrc2QiLCJtYWMiOiIyNmI5MDAyMTg0Mjc5MTQ1OTVlZmZlMzAzYTA0ZGQ1ZmYwNjBkOTQxZGJkZWUzMzI3MzFlM2QwNGEwN2I0OWE1IiwidGFnIjoiIn0%3D";
         RequestQueue queue = Volley.newRequestQueue(this);
         String url = "https://course.masaischool.com/dashboard";
 
@@ -91,6 +92,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Toast.makeText(MainActivity.this, error.toString(), Toast.LENGTH_SHORT).show();
+                Log.d("error",error.toString());
             }
         }){
             @Override
@@ -98,19 +100,31 @@ public class MainActivity extends AppCompatActivity {
                 HashMap<String,String> header = new HashMap<>();
                 header.put("Host","<calculated when request is sent>");
                 header.put("cookie",cookieStr);
+                header.put("Postman-Token","<calculated when request is sent>");
                 return header;
             }
 
+            @Override
+            public byte[] getBody() throws AuthFailureError {
+                return super.getBody();
+            }
+
+            @Nullable
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                return super.getParams();
+            }
         };
 
         // Add the request to the RequestQueue.
-        queue.add(stringRequest);
+
 
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                notificationManager.notify(NOTIFICATION_ID,notification);
+                queue.add(stringRequest);
+                //notificationManager.notify(NOTIFICATION_ID,notification);
             }
         });
     }
