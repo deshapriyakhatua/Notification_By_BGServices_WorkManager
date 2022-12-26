@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -33,11 +34,15 @@ public class MainActivity extends AppCompatActivity {
     private static int NOTIFICATION_ID = 1;
     private static String NOTIFICATION_CHANNEL_ID = "1";
 
+    private String requestedResult;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // Notification
 
         //PENDING INTENT
         Intent intent = new Intent(getApplicationContext(),MainActivity.class);
@@ -72,11 +77,16 @@ public class MainActivity extends AppCompatActivity {
         button = findViewById(R.id.button);
 
 
+
+
+
         // Network request
 
         // Instantiate the RequestQueue.
         String cookieStr = "_ga=GA1.1.324437731.1671815920; _ga_QPY5B063JV=GS1.1.1671815919.1.1.1671816271.0.0.0; XSRF-TOKEN=eyJpdiI6InNVRWhCYm1FQjhpRlFnZmxqNzhxbnc9PSIsInZhbHVlIjoiQkduaENTai9leWFUcllBM21NZnpDckJGM1pHZGVpN0I3T0FCYVkzczMvVzRTK1hLQ2VNMU9TWkk0UG01d25CTHV6RmxOUmF5aDdibEU3b3ZmUUdlSi9sNHVtMDN1d2tTY3B2VFErdFcrM2xWNFVEMFU1WFhuaHRGNmo1SDdtTlEiLCJtYWMiOiIxY2VmZWY4MGRjOGZiYzUwNDViZmE5MTllZjE4YjRjYTk3MTQ5MmJjNmNjMDczMzkyMDlkMjBlZTRjMGY3NmVlIiwidGFnIjoiIn0%3D; masai_school_course_session=eyJpdiI6IjIyQ0xWNjY3ZXZXUS9vcjhTY0lVbXc9PSIsInZhbHVlIjoiU0pmVzcwaUp6VXNCelJrTWJGTmlRN1JuL0lCS0FjOWhBb0tQcVpxVEFic3BOajlXWUV6UUxtOHZFUVVuRGF5d1k1TjFrVmdnMlJrbjh6Z1RZNXZyUm94TldyMUJUenlzSjUvdlkrRS9nOUdiTnh0NVZyZldYbGlpVTFoNzZrc2QiLCJtYWMiOiIyNmI5MDAyMTg0Mjc5MTQ1OTVlZmZlMzAzYTA0ZGQ1ZmYwNjBkOTQxZGJkZWUzMzI3MzFlM2QwNGEwN2I0OWE1IiwidGFnIjoiIn0%3D";
+
         RequestQueue queue = Volley.newRequestQueue(this);
+
         String url = "https://course.masaischool.com/dashboard";
 
         // Request a string response from the provided URL.
@@ -85,6 +95,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
                         // Display the first 500 characters of the response string.
+                        requestedResult = response.toString();
                         Toast.makeText(MainActivity.this, "Response is: " + response, Toast.LENGTH_SHORT).show();
                         Log.d("response",response);
                     }
@@ -96,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }){
             @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
+            public Map<String, String> getParams() throws AuthFailureError {
                 HashMap<String,String> header = new HashMap<>();
                 header.put("Host","<calculated when request is sent>");
                 header.put("cookie",cookieStr);
@@ -109,11 +120,7 @@ public class MainActivity extends AppCompatActivity {
                 return super.getBody();
             }
 
-            @Nullable
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                return super.getParams();
-            }
+
         };
 
         // Add the request to the RequestQueue.
@@ -124,7 +131,16 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 queue.add(stringRequest);
-                //notificationManager.notify(NOTIFICATION_ID,notification);
+
+                if(requestedResult != null){
+                    if(requestedResult.contains("you have")){
+                        notificationManager.notify(NOTIFICATION_ID,notification);
+                        TextView textView = findViewById(R.id.textView);
+                        textView.setText(requestedResult);
+                    }
+                }else{
+                    Toast.makeText(MainActivity.this, "0 Notification", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
