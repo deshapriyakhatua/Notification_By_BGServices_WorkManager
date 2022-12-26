@@ -98,6 +98,17 @@ public class MainActivity extends AppCompatActivity {
                         requestedResult = response.toString();
                         Toast.makeText(MainActivity.this, "Response is: " + response, Toast.LENGTH_SHORT).show();
                         Log.d("response",response);
+
+                        if(requestedResult != null){
+                            if(requestedResult.contains("you have")){
+                                notificationManager.notify(NOTIFICATION_ID,notification);
+                            }else{
+                                Toast.makeText(MainActivity.this, "0 Notification", Toast.LENGTH_SHORT).show();
+                            }
+                            TextView textView = findViewById(R.id.textView);
+                            textView.setText(requestedResult);
+                        }
+
                     }
                 }, new Response.ErrorListener() {
             @Override
@@ -131,16 +142,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 queue.add(stringRequest);
-
-                if(requestedResult != null){
-                    if(requestedResult.contains("you have")){
-                        notificationManager.notify(NOTIFICATION_ID,notification);
-                        TextView textView = findViewById(R.id.textView);
-                        textView.setText(requestedResult);
-                    }
-                }else{
-                    Toast.makeText(MainActivity.this, "0 Notification", Toast.LENGTH_SHORT).show();
-                }
             }
         });
     }
