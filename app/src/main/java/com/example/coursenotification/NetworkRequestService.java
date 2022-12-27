@@ -42,8 +42,10 @@ public class NetworkRequestService extends Service {
     private static String NOTIFICATION_CHANNEL_ID = "1";
 
     private Handler handler;
+    private static Runnable runnable;
     private String requestedResult;
     MediaPlayer mediaPlayer;
+    private boolean bool;
 
 
     @Nullable
@@ -57,32 +59,47 @@ public class NetworkRequestService extends Service {
 
         mediaPlayer =MediaPlayer.create(this, Settings.System.DEFAULT_RINGTONE_URI);
         sendNotification();
+        bool = true;
 
-        new Thread(new Runnable(){
+        handler = new Handler();
+        runnable = new Runnable() {
             public void run() {
-                // TODO Auto-generated method stub
-                while(true)
-                {
-                    try {
-                        Thread.sleep(20000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                    //REST OF CODE HERE//
-                    mediaPlayer.start();
-                    networkRequest();
-                    queue.add(stringRequest);
-                }
-
+                //mediaPlayer.stop();
+                mediaPlayer.start();
+                networkRequest();
+                queue.add(stringRequest);
+                handler.postDelayed(runnable, 10000);
             }
-        }).start();
+        };
+
+        handler.postDelayed(runnable, 15000);
+
+//        new Thread(new Runnable(){
+//            public void run() {
+//                // TODO Auto-generated method stub
+//                while(true)
+//                {
+//                    try {
+//                        Thread.sleep(20000);
+//                    } catch (InterruptedException e) {
+//                        e.printStackTrace();
+//                    }
+//                    //REST OF CODE HERE//
+//                    mediaPlayer.start();
+//                    networkRequest();
+//                    queue.add(stringRequest);
+//                }
+//
+//            }
+//        }).start();
 
         return START_STICKY;
     }
 
     @Override
     public void onDestroy() {
-        //mediaPlayer.stop();
+        mediaPlayer.stop();
+        handler.removeCallbacks(runnable);
         super.onDestroy();
     }
 
