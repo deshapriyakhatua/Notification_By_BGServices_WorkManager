@@ -56,6 +56,7 @@ public class NetworkRequestService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
 
         mediaPlayer =MediaPlayer.create(this, Settings.System.DEFAULT_RINGTONE_URI);
+        sendNotification();
 
         new Thread(new Runnable(){
             public void run() {
@@ -81,7 +82,7 @@ public class NetworkRequestService extends Service {
 
     @Override
     public void onDestroy() {
-        mediaPlayer.stop();
+        //mediaPlayer.stop();
         super.onDestroy();
     }
 
@@ -93,7 +94,7 @@ public class NetworkRequestService extends Service {
         queue = Volley.newRequestQueue(this);
         requestedResult = null;
 
-        // Instantiate the RequestQueue.
+
         String cookieStr = "_ga=GA1.1.324437731.1671815920; _ga_QPY5B063JV=GS1.1.1671815919.1.1.1671816271.0.0.0; XSRF-TOKEN=eyJpdiI6InNVRWhCYm1FQjhpRlFnZmxqNzhxbnc9PSIsInZhbHVlIjoiQkduaENTai9leWFUcllBM21NZnpDckJGM1pHZGVpN0I3T0FCYVkzczMvVzRTK1hLQ2VNMU9TWkk0UG01d25CTHV6RmxOUmF5aDdibEU3b3ZmUUdlSi9sNHVtMDN1d2tTY3B2VFErdFcrM2xWNFVEMFU1WFhuaHRGNmo1SDdtTlEiLCJtYWMiOiIxY2VmZWY4MGRjOGZiYzUwNDViZmE5MTllZjE4YjRjYTk3MTQ5MmJjNmNjMDczMzkyMDlkMjBlZTRjMGY3NmVlIiwidGFnIjoiIn0%3D; masai_school_course_session=eyJpdiI6IjIyQ0xWNjY3ZXZXUS9vcjhTY0lVbXc9PSIsInZhbHVlIjoiU0pmVzcwaUp6VXNCelJrTWJGTmlRN1JuL0lCS0FjOWhBb0tQcVpxVEFic3BOajlXWUV6UUxtOHZFUVVuRGF5d1k1TjFrVmdnMlJrbjh6Z1RZNXZyUm94TldyMUJUenlzSjUvdlkrRS9nOUdiTnh0NVZyZldYbGlpVTFoNzZrc2QiLCJtYWMiOiIyNmI5MDAyMTg0Mjc5MTQ1OTVlZmZlMzAzYTA0ZGQ1ZmYwNjBkOTQxZGJkZWUzMzI3MzFlM2QwNGEwN2I0OWE1IiwidGFnIjoiIn0%3D";
 
 
@@ -112,8 +113,7 @@ public class NetworkRequestService extends Service {
 
                         if(requestedResult != null){
                             if(requestedResult.contains("adarsha")){
-                                sendNotification();
-                                notificationManager.notify(NOTIFICATION_ID,notification);
+
                             }else{
                                 //Toast.makeText(NetworkRequestService.this, "0 Notification", Toast.LENGTH_SHORT).show();
                             }
@@ -150,7 +150,7 @@ public class NetworkRequestService extends Service {
 
 
         //PENDING INTENT
-        Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+        Intent intent = new Intent(getApplicationContext(),NetworkRequestService.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
         PendingIntent pendingIntent = PendingIntent.getActivity(this,REQUEST_CODE,intent,PendingIntent.FLAG_UPDATE_CURRENT);
@@ -165,7 +165,7 @@ public class NetworkRequestService extends Service {
                 .setSummaryText("Summary Text");
 
         // creating notification
-        notificationManager = (NotificationManager) getSystemService(Service.NOTIFICATION_SERVICE);
+        notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         notification = new Notification.Builder(NetworkRequestService.this,NOTIFICATION_CHANNEL_ID)
                 .setLargeIcon(largeIcon)
                 .setContentTitle("new Title")
