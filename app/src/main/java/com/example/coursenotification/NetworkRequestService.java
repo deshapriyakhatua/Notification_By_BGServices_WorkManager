@@ -29,6 +29,9 @@ import com.android.volley.toolbox.Volley;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 
 public class NetworkRequestService extends Service {
@@ -41,11 +44,11 @@ public class NetworkRequestService extends Service {
     private static int NOTIFICATION_ID = 1;
     private static String NOTIFICATION_CHANNEL_ID = "1";
 
-    private Handler handler;
     private static Runnable runnable;
     private String requestedResult;
     MediaPlayer mediaPlayer;
     private boolean bool;
+    ScheduledExecutorService scheduledExecutorService;
 
 
     @Nullable
@@ -61,37 +64,17 @@ public class NetworkRequestService extends Service {
         sendNotification();
         bool = true;
 
-        handler = new Handler();
-        runnable = new Runnable() {
+        scheduledExecutorService = Executors.newScheduledThreadPool(1);
+        scheduledExecutorService.scheduleAtFixedRate(new Runnable(){
             public void run() {
-                //mediaPlayer.stop();
+                // TODO Auto-generated method stub
                 mediaPlayer.start();
                 networkRequest();
                 queue.add(stringRequest);
-                handler.postDelayed(runnable, 10000);
+
             }
-        };
+        },10,10, TimeUnit.SECONDS);
 
-        handler.postDelayed(runnable, 15000);
-
-//        new Thread(new Runnable(){
-//            public void run() {
-//                // TODO Auto-generated method stub
-//                while(true)
-//                {
-//                    try {
-//                        Thread.sleep(20000);
-//                    } catch (InterruptedException e) {
-//                        e.printStackTrace();
-//                    }
-//                    //REST OF CODE HERE//
-//                    mediaPlayer.start();
-//                    networkRequest();
-//                    queue.add(stringRequest);
-//                }
-//
-//            }
-//        }).start();
 
         return START_STICKY;
     }
@@ -99,7 +82,7 @@ public class NetworkRequestService extends Service {
     @Override
     public void onDestroy() {
         mediaPlayer.stop();
-        handler.removeCallbacks(runnable);
+        scheduledExecutorService.shutdown();
         super.onDestroy();
     }
 
