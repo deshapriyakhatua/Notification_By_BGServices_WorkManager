@@ -1,23 +1,22 @@
 package com.example.coursenotification;
 
+import static android.content.Context.NOTIFICATION_SERVICE;
+
 
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.MediaPlayer;
-import android.os.Handler;
-import android.os.IBinder;
-import android.provider.Settings;
 import android.util.Log;
-import android.widget.Button;
-import android.widget.Toast;
 
-import androidx.annotation.Nullable;
+import androidx.annotation.NonNull;
+import androidx.work.Worker;
+import androidx.work.WorkerParameters;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -29,12 +28,8 @@ import com.android.volley.toolbox.Volley;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 
-
-public class NetworkRequestService extends Service {
+public class WorkManager extends Worker {
 
     private NotificationManager notificationManager;
     private Notification notification;
@@ -49,51 +44,28 @@ public class NetworkRequestService extends Service {
     private static Runnable runnable;
     private String requestedResult;
     MediaPlayer mediaPlayer;
-    private boolean bool;
-    ScheduledExecutorService scheduledExecutorService;
 
 
-    @Nullable
-    @Override
-    public IBinder onBind(Intent intent) {
-        return null;
+    public WorkManager(@NonNull Context context, @NonNull WorkerParameters workerParams) {
+        super(context, workerParams);
     }
 
+    @NonNull
     @Override
-    public int onStartCommand(Intent intent, int flags, int startId) {
-
-        mediaPlayer =MediaPlayer.create(this, Settings.System.DEFAULT_RINGTONE_URI);
-        sendNotification();
-        bool = true;
-
-        scheduledExecutorService = Executors.newScheduledThreadPool(1);
-        scheduledExecutorService.scheduleAtFixedRate(new Runnable(){
-            public void run() {
-                // TODO Auto-generated method stub
-                mediaPlayer.start();
-                networkRequest();
-                queue.add(stringRequest);
-
-            }
-        },10,30, TimeUnit.SECONDS);
-
-
-        return START_NOT_STICKY;
+    public Result doWork() {
+        try {
+            networkRequest();
+            queue.add(stringRequest);
+        }catch (Exception e){
+            Result.retry();
+        }
+        return Result.success();
     }
-
-    @Override
-    public void onDestroy() {
-        mediaPlayer.stop();
-        scheduledExecutorService.shutdown();
-        super.onDestroy();
-    }
-
-
 
 
     private void networkRequest(){
 
-        queue = Volley.newRequestQueue(this);
+        queue = Volley.newRequestQueue(getApplicationContext());
         requestedResult = null;
 
 
@@ -219,4 +191,3 @@ public class NetworkRequestService extends Service {
                 .build();
     }
 }
-
