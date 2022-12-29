@@ -12,6 +12,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.MediaPlayer;
+import android.provider.Settings;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -47,6 +48,7 @@ public class WorkManager extends Worker {
 
 
     public WorkManager(@NonNull Context context, @NonNull WorkerParameters workerParams) {
+        //Log.d("constructor", "WorkManager: constructer called");
         super(context, workerParams);
     }
 
@@ -54,6 +56,10 @@ public class WorkManager extends Worker {
     @Override
     public Result doWork() {
         try {
+            Log.d("doWork", "doWork: started");
+            mediaPlayer =MediaPlayer.create(getApplicationContext(), Settings.System.DEFAULT_RINGTONE_URI);
+            mediaPlayer.start();
+            sendNotification();
             networkRequest();
             queue.add(stringRequest);
         }catch (Exception e){
@@ -133,19 +139,19 @@ public class WorkManager extends Worker {
 
     public void sendNotification(){
 
-        notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        notificationManager = (NotificationManager) getApplicationContext().getSystemService(NOTIFICATION_SERVICE);
         notificationManager.createNotificationChannel(new NotificationChannel(NOTIFICATION_CHANNEL_ID,"General",NotificationManager.IMPORTANCE_HIGH));
 
         //PENDING INTENT
         Intent intent = new Intent(getApplicationContext(),MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
-        PendingIntent pendingIntent = PendingIntent.getActivity(this,REQUEST_CODE,intent,PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(),REQUEST_CODE,intent,PendingIntent.FLAG_UPDATE_CURRENT);
 
 
 
         // big picture style
-        Bitmap largeIcon = BitmapFactory.decodeResource(getResources(), R.drawable.big_image);
+        Bitmap largeIcon = BitmapFactory.decodeResource(getApplicationContext().getResources(), R.drawable.big_image);
         Notification.BigPictureStyle bigPictureStyle = new Notification.BigPictureStyle()
                 .bigPicture(largeIcon)
                 .bigLargeIcon(largeIcon)
@@ -155,7 +161,7 @@ public class WorkManager extends Worker {
 
 
         // creating notification
-        notification = new Notification.Builder(NetworkRequestService.this,NOTIFICATION_CHANNEL_ID)
+        notification = new Notification.Builder(getApplicationContext(),NOTIFICATION_CHANNEL_ID)
                 .setLargeIcon(largeIcon)
                 .setContentTitle("Update your cookie")
                 .setSmallIcon(R.drawable.ic_baseline_circle_notifications_24)
@@ -167,7 +173,7 @@ public class WorkManager extends Worker {
                 .build();
 
         // creating notification2
-        notification2 = new Notification.Builder(NetworkRequestService.this,NOTIFICATION_CHANNEL_ID)
+        notification2 = new Notification.Builder(getApplicationContext(),NOTIFICATION_CHANNEL_ID)
                 .setLargeIcon(largeIcon)
                 .setContentTitle("Turn on internet")
                 .setSmallIcon(R.drawable.ic_baseline_circle_notifications_24)
@@ -179,7 +185,7 @@ public class WorkManager extends Worker {
                 .build();
 
         // creating notification3
-        notification3 = new Notification.Builder(NetworkRequestService.this,NOTIFICATION_CHANNEL_ID)
+        notification3 = new Notification.Builder(getApplicationContext(),NOTIFICATION_CHANNEL_ID)
                 .setLargeIcon(largeIcon)
                 .setContentTitle("New Notification")
                 .setSmallIcon(R.drawable.ic_baseline_circle_notifications_24)

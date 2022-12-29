@@ -1,5 +1,7 @@
 package com.example.coursenotification;
 
+
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.work.Constraints;
 import androidx.work.NetworkType;
@@ -9,6 +11,7 @@ import androidx.work.WorkRequest;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -34,19 +37,20 @@ public class MainActivity extends AppCompatActivity {
                 .setRequiredNetworkType(NetworkType.CONNECTED)
                 .build();
 
+
         // Work request
         uploadWorkRequest =
                 new PeriodicWorkRequest.Builder(WorkManager.class,15, TimeUnit.MINUTES)
                         .addTag("tag for periodic Request")
-                        .setConstraints(constraints)
+//                        .setConstraints(constraints)
                         .build();
 
         start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                  //startService(new Intent(MainActivity.this,NetworkRequestService.class));
-                androidx.work.WorkManager
-                        .getInstance(getApplicationContext())
+                Log.d("buttonPressed", "onClick: ");
+                androidx.work.WorkManager.getInstance(getApplicationContext())
                         .enqueue(uploadWorkRequest);
 
             }
@@ -56,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //stopService(new Intent(MainActivity.this,NetworkRequestService.class));
+                androidx.work.WorkManager.getInstance(getApplicationContext()).cancelAllWorkByTag("tag for periodic Request");
             }
         });
     }
