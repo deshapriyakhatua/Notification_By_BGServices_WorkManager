@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
 import java.util.concurrent.TimeUnit;
 
@@ -21,8 +22,10 @@ import java.util.concurrent.TimeUnit;
 public class MainActivity extends AppCompatActivity {
     Button start;
     Button stop;
+    EditText editText;
     Constraints constraints;
     private WorkRequest uploadWorkRequest;
+    public static String cookie;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +34,9 @@ public class MainActivity extends AppCompatActivity {
 
         start = findViewById(R.id.button);
         stop = findViewById(R.id.button2);
+        editText = findViewById(R.id.editTextTextPersonName);
+
+        cookie = editText.getText().toString();
 
         // constraints
         constraints  = new Constraints.Builder()
@@ -63,5 +69,8 @@ public class MainActivity extends AppCompatActivity {
                 androidx.work.WorkManager.getInstance(getApplicationContext()).cancelAllWorkByTag("tag for periodic Request");
             }
         });
+    }
+    public static String getCookie(){
+        return cookie;
     }
 }
