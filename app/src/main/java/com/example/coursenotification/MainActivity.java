@@ -3,6 +3,7 @@ package com.example.coursenotification;
 
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.WindowCompat;
 import androidx.work.Constraints;
 import androidx.work.NetworkType;
 import androidx.work.OneTimeWorkRequest;
@@ -31,6 +32,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // hiding action bar
+        getSupportActionBar().hide();
+
+        // hiding status bar
+        WindowCompat.setDecorFitsSystemWindows(getWindow(),false);
+
 
         start = findViewById(R.id.button);
         stop = findViewById(R.id.button2);
