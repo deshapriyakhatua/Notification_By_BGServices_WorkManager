@@ -59,11 +59,21 @@ public class WorkManager extends Worker {
     public Result doWork() {
         try {
             Log.d("doWork", "doWork: started");
-            mediaPlayer =MediaPlayer.create(getApplicationContext(), Settings.System.DEFAULT_RINGTONE_URI);
 
-            sendNotification();
-            networkRequest();
-            queue.add(stringRequest);
+            new Thread(new Runnable() {
+                public void run()
+                {
+                    // code goes here.
+                    mediaPlayer =MediaPlayer.create(getApplicationContext(), Settings.System.DEFAULT_RINGTONE_URI);
+
+                    sendNotification();
+                    networkRequest();
+                    queue.add(stringRequest);
+
+                }}).start();
+
+
+
         }catch (Exception e){
             Result.retry();
         }
@@ -81,7 +91,7 @@ public class WorkManager extends Worker {
 
          if(MainActivity.getCookie().length()>0){ cookieStr = MainActivity.getCookie(); }
          else{
-             cookieStr = "_ga=GA1.1.324437731.1671815920; _ga_QPY5B063JV=GS1.1.1672238911.2.0.1672238916.0.0.0; XSRF-TOKEN=eyJpdiI6Ing1ZzVJeUFhWHBVaGlPcytFM1ZWMHc9PSIsInZhbHVlIjoiZkYwSEVVQzI4MGRnKy9sZE1UY3lscWRYYTF6NWYxSG1rN09IQ0VYRXdhaU9MK0VtcXRMRU1abGNxZ3dmaGtqYlNUbWs1K2hsTkQ1ODhXN1UvQmNCb1dhY2lxWk9tWG5IZmVJSXpGaENVdENPMFdoLzVLWXdTVzNkckk0WGppR2EiLCJtYWMiOiI2OWRmMGI5YTFjMTFmYjQyNmVjMzRiYjQ0OWQ5NTEwZWZhNTc4NGE4MmRjMTE2ZjdkNzRjNDkxZmQ3MWFkN2VmIiwidGFnIjoiIn0%3D; masai_school_course_session=eyJpdiI6IlFaei9Hd2s3R3pvaEpqT0xHU3VTT0E9PSIsInZhbHVlIjoiMFNtUjJLZ3NTaXZYQUthb3RGZGR2YzRNLzZFR0dSTU1kSWtqRm9KT1ZGZkYzRU5kTXNMeWhQN094Ykhya0ZveHp5SFUySjFWUzZHTmZvS0pVc2lCWkdWMmdSQUNLeisxVlBtK05xNkxvcGZiMEMvS2ZiNnF5NTh2Q2laUTFnTloiLCJtYWMiOiJjYjAzNDQzZDk2YTUxYjc5NGVmYTc4M2I4ZWI2YzQ0OWI4YTA2N2RlMjkzNDI5MGZiNTBjZTcyYmRkZDY3ODk3IiwidGFnIjoiIn0%3D";
+             cookieStr = "_ga=GA1.1.324437731.1671815920; _ga_QPY5B063JV=GS1.1.1672421517.3.1.1672421546.0.0.0; XSRF-TOKEN=eyJpdiI6InRUV29ab0pBWHZheHNVUzZKUW5WaUE9PSIsInZhbHVlIjoiam4yOE4vLythU1RqUnQ2OFhHZDB1d2ZCWTVZK3VpR20rbHVseFRqeXNNTHBSWWhFbDlVenBEN3RrdmlISGttR1FyZ2xVK0lFN1RUdjdQbFZMdWxacmc4bDFiUWp0eGgxdVdXMHk5YVBxZDN4LzJWMG5acFQ4d3ZramtHVWNOU3YiLCJtYWMiOiIwNjg0MTRkOTZhNTYwNDNhZWRlODg1NDgwODQ4YzFlNThiZTNhNjFhZDYyYzhiMDE5ZmZmNmMwYjE2NTcxYjBhIiwidGFnIjoiIn0%3D; masai_school_course_session=eyJpdiI6InBOdko4RmhtR09DSjJIU3ZTK2wwUmc9PSIsInZhbHVlIjoiU1ZjaTZEb1hMelkwYjNGN0YvMThvU0lGcXVZaDlDa3BqaUVTTzNNb3JVTTQwNHIrZnJ1MUk4cWFGMzhyTlVRTHBhay91S1ZIendNYXFzaGQ1cmRrcjhrYVN4U2tFbCtac21WSGdmRVY4VGZXUlJaNVYrREg2YzVFMTN6VGUxOEgiLCJtYWMiOiIwMjM1ZGJhMDA4NDg0ODlkNTMzODBlZTNkYjkxZDE5YWY2MTg5Nzg0ZDk0NWFkNDBkNjY0NzUxNDZlZWE5MDViIiwidGFnIjoiIn0%3D";
          }
 
         String url = "https://course.masaischool.com/dashboard";
@@ -103,8 +113,9 @@ public class WorkManager extends Worker {
                                     Log.d("response1",response);
                                     notificationManager.notify(NOTIFICATION_ID,notification3);
                                     mediaPlayer.start();
+                                }else {
+                                    notificationManager.notify(NOTIFICATION_ID,notification4);
                                 }
-                                notificationManager.notify(NOTIFICATION_ID,notification4);
 
                             }else{
                                 notificationManager.notify(NOTIFICATION_ID,notification);
